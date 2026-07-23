@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/Husteel/Downloads/steez_runner_38.html -->
+<!-- saved from url=(0055)file:///C:/Users/Husteel/Downloads/steez_runner_40.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,9 +36,14 @@
   .gameArea { padding:4px; }
   .frame { border-radius:8px; }
 
+  .rotateHint { display:flex; align-items:center; gap:6px; color:#B8543A; font-size:12px; margin-bottom:8px; flex-shrink:0; }
+  .rotateHint svg { flex-shrink:0; animation: rotateHintSpin 1.6s ease-in-out infinite; }
+  @keyframes rotateHintSpin { 0%,100%{ transform:rotate(0deg);} 50%{ transform:rotate(-90deg);} }
+
   @media (orientation: landscape) {
     .gameArea { padding:0; }
     .frame { border-radius:0; border:none; }
+    .rotateHint { display:none; }
   }
 </style>
 </head>
@@ -75,6 +80,16 @@
 </div>
 
 <div class="hint">탭 또는 스페이스바로 점프 · 1분 지나면 더 빨라져요</div>
+
+<div class="rotateHint">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#B8543A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="5" y="2" width="14" height="20" rx="2"></rect>
+<line x1="12" y1="18" x2="12.01" y2="18"></line>
+<path d="M21 8 a9 9 0 0 0 -6-6" stroke="#D97757"></path>
+<polyline points="21 3 21 8 16 8" stroke="#D97757"></polyline>
+</svg>
+<span>Turn your phone sideways to play</span>
+</div>
 
 <div class="frame" id="frame" style="margin-left: 0px; width: 1344px; height: 601.263px; cursor: pointer;">
 <canvas id="gc" width="1344" height="601" style="width: 1344px; height: 601.263px;"></canvas>
