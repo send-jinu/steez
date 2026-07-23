@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/Husteel/Downloads/steez_runner_36.html -->
+<!-- saved from url=(0055)file:///C:/Users/Husteel/Downloads/steez_runner_37.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
     78%  { clip-path: inset(0 0% 0 0); }
     100% { clip-path: inset(0 0% 0 100%); }
   }
-  .gameArea { opacity:0; transition: opacity 0.6s ease; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 8px; }
+  .gameArea { opacity:0; transition: opacity 0.6s ease; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 8px; overflow:hidden; }
   .gameArea.show { opacity:1; }
   .logoWrap { width:100%; max-width:900px; display:flex; justify-content:center; margin-bottom:4px; flex-shrink:0; }
   .logoWrap svg { width: 110px; height: auto; }
@@ -76,8 +76,8 @@
 
 <div class="hint">탭 또는 스페이스바로 점프 · 1분 지나면 더 빨라져요</div>
 
-<div class="frame" id="frame" style="width: 1344px; height: 601.263px; cursor: pointer;">
-<canvas id="gc" width="1344" height="601" style="width: 1344px; height: 601.263px;"></canvas>
+<div class="frame" id="frame" style="width: 1920px; height: 858.947px; cursor: pointer;">
+<canvas id="gc" width="1920" height="859" style="width: 1920px; height: 858.947px;"></canvas>
 <div id="overlay"><div style="font-size:15px; font-weight:500; color:#1F1B17;">탭해서 시작</div></div>
 </div>
 </div>
@@ -105,11 +105,17 @@ try{
     var availW = parent.clientWidth;
     var availH = parent.clientHeight;
     var aspect = LOGICAL_W / LOGICAL_H;
+    var isPortrait = availH > availW;
     var displayWidth = availW;
     var displayHeight = displayWidth / aspect;
     if(displayHeight > availH){
       displayHeight = availH;
       displayWidth = displayHeight * aspect;
+    }
+    if(isPortrait){
+      var boost = 1.3; // 세로형에서 화면 폭보다 살짝 크게 확대 (좌우는 잘림, 장애물 로직엔 영향 없음)
+      displayWidth *= boost;
+      displayHeight *= boost;
     }
     var dpr = Math.min(window.devicePixelRatio || 1, 3);
     canvas.width = Math.round(displayWidth * dpr);
